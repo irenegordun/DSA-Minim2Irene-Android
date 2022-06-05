@@ -15,6 +15,18 @@
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
+        
+        //MINIM 2 IRENE
+        <activity
+            android:name=".DenunciarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DoneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ErrorActivity"
+            android:exported="false" />
+        
         <activity
             android:name=".MainActivity"
             android:exported="true">
