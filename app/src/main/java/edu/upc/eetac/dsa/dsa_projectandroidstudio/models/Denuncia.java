@@ -40,7 +40,7 @@ public class Denuncia {
         this.message = message;
     }
 
-    //to String
+    //toString
     public String toString(){
         return "Denuncia{" +
                 "date='" + date + '\'' +

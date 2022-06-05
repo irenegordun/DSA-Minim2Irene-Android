@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class MenuActivity extends AppCompatActivity {
@@ -17,12 +18,13 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         ImageButton back_btn = (ImageButton) findViewById(R.id.back_btn);
-        ImageButton home_btn = (ImageButton) findViewById(R.id.home_btn);
+        /*ImageButton home_btn = (ImageButton) findViewById(R.id.home_btn);
         ImageButton profile_btn = (ImageButton) findViewById(R.id.profile_btn);
         ImageButton top_btn = (ImageButton) findViewById(R.id.top_btn);
         ImageButton inventory_btn = (ImageButton) findViewById(R.id.inventory_btn);
-        ImageButton store_btn = (ImageButton) findViewById(R.id.store_btn);
-        ImageButton denuncia_btn = (ImageButton) findViewById(R.id.b_btn);
+        ImageButton store_btn = (ImageButton) findViewById(R.id.store_btn)*/
+        //MINIM 2 IRENE GORDUN
+        Button denuncia_btn = (Button) findViewById(R.id.denuciar_btn);
 
 
         //CODI AFEGIT PER IRENE GORDUN MINIM2
@@ -44,7 +46,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        profile_btn.setOnClickListener(new View.OnClickListener() {
+        /*profile_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -81,7 +83,7 @@ public class MenuActivity extends AppCompatActivity {
                 fragmentSelector = 5;
                 openActivity();
             }
-        });
+        });*/
     }
 
     private void openActivity() {

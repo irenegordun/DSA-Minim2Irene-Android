@@ -76,7 +76,7 @@ public class DenunciarActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Denuncia sense exit", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), ErrorActivity.class);
                         }
-                    });
+                });
 
                 }
             });
