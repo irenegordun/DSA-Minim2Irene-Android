@@ -19,6 +19,6 @@ public interface ApiServices {
     //POST AFEGIT PER IRENE GORDUN PEL MINIM2
 
     @POST("/dsaApp/user/denuncia")
-    Call<User>denuncia(@Body Denuncia ref);
+    Call<Denuncia>denuncia(@Body Denuncia ref);
 }
 

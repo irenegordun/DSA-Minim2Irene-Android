@@ -39,5 +39,14 @@ public class Denuncia {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    //to String
+    public String toString(){
+        return "Denuncia{" +
+                "date='" + date + '\'' +
+                ", informer='" + informer + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
 

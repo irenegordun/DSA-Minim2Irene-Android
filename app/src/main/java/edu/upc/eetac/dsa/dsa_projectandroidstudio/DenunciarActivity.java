@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,65 +22,63 @@ import retrofit2.Response;
 public class DenunciarActivity extends AppCompatActivity {
     ApiServices services;
 
-    //atributs enunciat
-    EditText date;
-    private EditText informer;
-    private EditText message;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_denuncia);
 
-        //elements del layout
-        date = findViewById(R.id.dateText);
-        informer = findViewById(R.id.userNameText);
-        message = findViewById(R.id.descripcioText);
+        services = ApiRetrofit.getApiService().create(ApiServices.class);
 
-        Button enviar = findViewById(R.id.send_btn);
+        //atributs enunciat
+        EditText date;
+        EditText informer;
+        EditText message;
+
+        //elements del layout
+        date = findViewById(R.id.DateText);
+        informer = findViewById(R.id.InformerText);
+        message = findViewById(R.id.MessageText);
+
+                Button enviar = (Button) findViewById(R.id.send_btn);
 
         //apreta botó enviar
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String date = date.getText().toString();
-                String informer = informer.getText().toString();
-                String message = message.getText().toString();
-
-                services = ApiRetrofit.getApiService().create(ApiServices.class);
-
-                //services.denuncia(new Denuncia(date, informer, message));
+                String dateString = date.getText().toString();
+                String informerString = informer.getText().toString();
+                String messageString = message.getText().toString();
 
                 //per guardar nom per futures denuncies
                 SharedPreferences sharedPreferences = getSharedPreferences("userName", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("User", informer);
+                editor.putString("User", informerString);
                 editor.commit();
 
+                Denuncia ref = new Denuncia (dateString, informerString, messageString);
+                Call<Denuncia> call = services.denuncia(ref);
+                //services.denuncia(new Denuncia(date, informer, message));
 
-                //denuncia
-                Denuncia ref = new Denuncia(date, informer, message);
-                Call<User> call = services.denuncia(ref);
-
-                call.enqueue(new Callback<Denuncia>(){
+                call.enqueue(new Callback<Denuncia>() {
                     @Override
                     public void onResponse(Call<Denuncia> call, Response<Denuncia> response) {
-                        //success
-                        if(response.code() == 200) {
-                            Log.d("User", "Denuncia completada");
-                            Toast.makeText(getApplicationContext(),"Denuncia creada amb exit", Toast.LENGTH_SHORT).show();
+                        Log.i("Denuncia d'abus:" ,""+ ref.toString());
+                        if (response.isSuccessful()) {
+                            Log.d("Denuncia", "Denuncia completada");
+                            Toast.makeText(getApplicationContext(), "Denuncia creada amb exit", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), DoneActivity.class);
                         }
                     }
 
-                    @Override
-                    public void onFailure(Call<Denuncia> call, Throwable t) {
-                        Log.d("User", "Denuncia sense exit");
-                        Toast.makeText(getApplicationContext(),"Denuncia sense exit", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), ErrorActivity.class);
-                    }
+                        @Override
+                        public void onFailure(Call<Denuncia> call, Throwable t) {
+                            Log.d("Denuncia", "Denuncia sense exit");
+                            Toast.makeText(getApplicationContext(), "Denuncia sense exit", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), ErrorActivity.class);
+                        }
+                    });
+
                 }
-            }
-        });
+            });
     }
 }
